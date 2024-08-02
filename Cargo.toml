@@ -1,0 +1,15 @@
+[package]
+name = "ssd1322_rs"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+embedded-hal-async = "1.0.0"
+embedded-hal = "1.0.0"
+embedded-graphics-core = {version = "0.4", optional = true}
+
+[features]
+frame = ["embedded-graphics-core"]
+default = ["frame"]
