@@ -8,6 +8,7 @@ license-file = "LICENSE"
 keywords = ["oled", "screen", "embedded", "spi", "async"]
 description = "A no-std async Rust driver for the SSD1322 OLED screen"
 readme = "README.md"
+categories = ["embedded"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
