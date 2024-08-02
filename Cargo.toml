@@ -4,7 +4,6 @@ authors = ["Jamie Bird"]
 version = "0.1.0"
 edition = "2021"
 license = "MIT OR Apache-2.0"
-license-file = "LICENSE"
 keywords = ["oled", "screen", "embedded", "spi", "async"]
 description = "A no-std async Rust driver for the SSD1322 OLED screen"
 readme = "README.md"
