@@ -19,8 +19,11 @@ The `ssd1322_rs` driver was created to fill a gap in the ecosystem for an asynch
 For reference, the screen I created this crate for is a 256x64 pixel screen. As the SSD1322 uses 4bpp, this means that the total bytes to be transferred is:
 
 $$
-Total Bytes = 128×64=8192 \\
-Total bits  = 8192b × (8bits/byte)=65536
+Total Bytes = 128×64=8192 
+$$
+
+$$
+Total bits  = 8192 × (8bits/byte)=65536
 $$
 
 Running the SPI bus at 10Mhz, this results in:
