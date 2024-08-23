@@ -31,10 +31,10 @@ $$
 
 Which is therefore 
 $$
-Time_{ms} = 0.0065536s ×1000  = 6.5536 milliseconds
+Time ToTransfer = 0.0065536s ×1000  = 6.5536 \ ms
 $$
 
-The performance hit of doing this without DMA was too much for our application, hence the creation of this crate, which focuses on performance throughput at the expense of memory efficiency (still no alloc or heap memory though!).
+The performance hit of trasnfering without DMA (6.5ms blocking) was too much for our application, hence the creation of this crate, which focuses on performance throughput at the expense of memory efficiency (still no alloc or heap memory though!).
 
 ## Features <a name = "features"></a>
 
