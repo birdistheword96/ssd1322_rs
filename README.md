@@ -45,7 +45,7 @@ The performance hit of trasnfering without DMA (6.5ms blocking) was too much for
 - Asynchronous API: Utilizes Rust's async/await syntax for non-blocking operations.
 - Supports SPI communication protocol only (Feel free to make a pull request if you want to add another comms method!).
 - Simple and complex API: Default setup takes care of the usual configuration, with command options to manually configure the screen.
-- No Standard Library: Suitable for #![no_std] environments.
+- No Standard Library: Suitable for `#![no_std]` environments.
 - No alloc
 - Minimal dependecies: Only relies on the embedded hal crates (with optional support for `embedded_graphics` which can be disabled with `default-features=false`)
 - Optional `frame` buffer (supporting `embedded_graphics` to simplify handling screen to a fixed-size bufffer)
