@@ -29,9 +29,10 @@ $$
 Time_s = \frac{Total Bits}{SPI clock speed} = \frac{65535 \ bits}{10,000,000 \ bits/second} = 0.0065536 \ seconds
 $$
 
-Which is therefore 
+Which is therefore:
+
 $$
-Time ToTransfer = 0.0065536s ×1000  = 6.5536 \ ms
+TimeToTransfer = 0.0065536s ×1000  = 6.5536 \ ms
 $$
 
 The performance hit of trasnfering without DMA (6.5ms blocking) was too much for our application, hence the creation of this crate, which focuses on performance throughput at the expense of memory efficiency (still no alloc or heap memory though!).
