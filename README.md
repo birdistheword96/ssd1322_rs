@@ -31,7 +31,7 @@ $$
 
 Which is therefore 
 $$
-Time_{ms} =0.0065536seconds×1000milliseconds/second  = 6.5536 \ milliseconds
+Time_{ms} = 0.0065536s ×1000  = 6.5536 milliseconds
 $$
 
 The performance hit of doing this without DMA was too much for our application, hence the creation of this crate, which focuses on performance throughput at the expense of memory efficiency (still no alloc or heap memory though!).
