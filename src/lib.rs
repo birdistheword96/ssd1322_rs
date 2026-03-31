@@ -63,6 +63,10 @@ where
     inverted: bool,
     /// Orientation of the display.
     orientation: Orientation,
+    /// Number of active display rows (COM lines).
+    num_rows: u8,
+    /// COM line display offset.
+    display_offset: u8,
 }
 
 
@@ -86,10 +90,23 @@ pub enum Orientation {
     Inverted = 0x14,
 }
 
-/// Optional configuration structure to invertthe colour or screen orientation
+/// Configuration structure for the SSD1322 display.
+///
+/// Controls colour inversion, screen orientation, and display geometry.
+/// The default configuration is suitable for a 256x64 display.
 pub struct Config {
-    inverted_colour: bool,
-    orientation: Orientation,
+    /// Whether the colours are inverted.
+    pub inverted_colour: bool,
+    /// Display orientation.
+    pub orientation: Orientation,
+    /// Number of active display rows (COM lines). Used to set the MUX ratio.
+    /// Common values: 64 for 256x64 displays, 32 for 256x32 displays.
+    /// Range: 16-128.
+    pub num_rows: u8,
+    /// COM line display offset. Some panels wire their COM lines starting at
+    /// a non-zero offset — set this to match the panel's datasheet.
+    /// Range: 0-127.
+    pub display_offset: u8,
 }
 
 impl Default for Config {
@@ -97,6 +114,8 @@ impl Default for Config {
         Self {
             inverted_colour: false,
             orientation: Orientation::Standard,
+            num_rows: 64,
+            display_offset: 0,
         }
     }
 }
@@ -117,6 +136,8 @@ where
             power,
             inverted: config.inverted_colour,
             orientation: config.orientation,
+            num_rows: config.num_rows,
+            display_offset: config.display_offset,
         }
     }
 
@@ -170,7 +191,7 @@ where
                 ComLayout::DualProgressive,
             ).prepare()?,
             Command::SetStartLine(0).prepare()?,
-            Command::SetDisplayOffset(0).prepare()?,
+            Command::SetDisplayOffset(self.display_offset).prepare()?,
             Command::SetDisplayMode(
                 {
                     if inverted {DisplayMode::Inverse} else {DisplayMode::Normal}
@@ -185,7 +206,7 @@ where
             Command::SetComDeselectVoltage(7).prepare()?,
             Command::SetContrastCurrent(0x3C).prepare()?,
             Command::SetMasterContrast(0xA).prepare()?,
-            Command::SetMuxRatio(0x3F).prepare()?,
+            Command::SetMuxRatio(self.num_rows - 1).prepare()?,
             Command::DisablePartialDisplay.prepare()?,
             // Don't bother setting DisplayB enhancements,
             Command::SetSleepMode(false).prepare()?,
