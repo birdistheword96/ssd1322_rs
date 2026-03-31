@@ -387,7 +387,7 @@ impl Command  {
                 _ => Err(CommandError::OutOfRange),
             },
             Command::SetMuxRatio(ratio) => match ratio {
-                16..=NUM_PIXEL_ROWS => ok_command!(arg_buf, 0xCA, [ratio - 1]),
+                16..=NUM_PIXEL_ROWS => ok_command!(arg_buf, 0xCA, [ratio]),
                 _ => Err(CommandError::OutOfRange),
             },
             Command::SetCommandLock(ena) => {
