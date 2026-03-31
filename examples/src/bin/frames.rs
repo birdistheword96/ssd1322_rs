@@ -81,12 +81,16 @@ pub async fn render_task(screen: ScreenResources) {
     let cs_pin = Output::new(screen.cs, Level::Low, Speed::Medium);
     let spi_dev = ExclusiveDevice::new_no_delay(spi_p, cs_pin).unwrap();
 
+    let config = ssd1322_rs::Config {
+        num_rows: SCREEN_HEIGHT as u8,
+        ..Default::default()
+    };
     let mut display = SSD1322::new(
         spi_dev,
         data_command_pin,
         reset,
         scr_power,
-        Default::default(),
+        config,
     );
     display.init_default(&mut Delay).await.unwrap();
     display

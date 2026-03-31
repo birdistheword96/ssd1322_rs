@@ -81,13 +81,21 @@ The following code is an exmaple of how to set up the screen. This code uses emb
     // Create an Exclusive device from the from the embedded_hal, for SPI busses with only one other device on.
     let spi_dev = ExclusiveDevice::new_no_delay(spi_p, cs_pin).unwrap();
 
+    // Configure the display
+    let config = ssd1322_rs::Config {
+        inverted_colour: false,            // Set to true to invert all pixel colours
+        orientation: Orientation::Standard, // Or Orientation::Inverted to flip the display
+        num_rows: 64,                      // Number of active rows — set to match your display (e.g. 32 for 256x32)
+        display_offset: 0,                 // COM line offset — adjust if your panel's datasheet specifies one
+    };
+
     // Create a display handle
     let mut display = SSD1322::new(
         spi_dev,
         data_command_pin,
         reset,
         scr_power,
-        Default::default(),
+        config,
     );
 
     // Initialise the display. This calls the reset procedue and then sends the neccesary commands to set up the display
