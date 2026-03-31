@@ -1,13 +1,13 @@
 [package]
 name = "ssd1322_rs"
 authors = ["Jamie Bird"]
-version = "0.2.0"
+version = "0.3.0"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 keywords = ["oled", "screen", "embedded", "spi", "async"]
 description = "A no-std async Rust driver for the SSD1322 OLED screen"
 readme = "README.md"
-categories = ["embedded"]
+categories = ["embedded", "no-std", "hardware-support"]
 repository = "https://github.com/birdistheword96/ssd1322_rs"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

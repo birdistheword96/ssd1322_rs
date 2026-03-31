@@ -235,7 +235,9 @@ pub enum Command  {
     /// Set the MUX ratio, which controls the number of COM lines that are active and thus the
     /// number of display pixel rows which are active. Which COM lines are active is controlled by
     /// `SetDisplayOffset`, and how the COM lines map to display RAM row addresses is controlled by
-    /// `SetStartLine`. Range 16-128.
+    /// `SetStartLine`. Range 15-127.
+    /// NOTE: MUX Ratio is 7-bit encoded as the actual ratio minus 1, so the value sent in the command
+    /// is one less than the number of active COM lines. 64 active COM lines corresponds to a MUX ratio value of 63.
     SetMuxRatio(u8),
     /// Set whether the command lock is enabled or disabled. Enabling the command lock (`true`)
     /// blocks all commands except `SetCommandLock`.
@@ -387,7 +389,7 @@ impl Command  {
                 _ => Err(CommandError::OutOfRange),
             },
             Command::SetMuxRatio(ratio) => match ratio {
-                16..=NUM_PIXEL_ROWS => ok_command!(arg_buf, 0xCA, [ratio]),
+                15..=NUM_PIXEL_ROWS => ok_command!(arg_buf, 0xCA, [ratio]),
                 _ => Err(CommandError::OutOfRange),
             },
             Command::SetCommandLock(ena) => {
